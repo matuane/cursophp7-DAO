@@ -1,59 +1,71 @@
 <?php
 
+//Calsse Usuário
 class Usuario
 {
-
+    //Atributos
     private $dtcadastro;
     private $idusuario;
     private $deslogin;
     private $dessenha;
 
+
+    //Construtor
     public function __construct($deslogin = "", $dessenha = "")
     {
         $this->deslogin = $deslogin;
         $this->dessenha = $dessenha;
     }
 
+    //Atualiza o id do usuário
     public function setIdusuario(int $idusuario)
     {
         $this->idusuario = $idusuario;
     }
 
+    //Atualiza o login do usuário
     public function setDeslogin(string $deslogin)
     {
         $this->deslogin = $deslogin;
     }
 
+    //Atualiza a senha do usuário
     public function setDessenha(string $dessenha)
     {
         $this->dessenha = $dessenha;
     }
 
+    //Atualiza a data de usuário do usuário
     public function setDtcadastro($dtcadastro)
     {
         $this->dtcadastro = $dtcadastro;
     }
 
+    //Recupera o valor do id do usuário
     public function getIdusuario()
     {
         return $this->idusuario;
     }
 
+    //Recupera o valor do login do usuário
     public function getDeslogin()
     {
         return $this->deslogin;
     }
 
+    //Recupera o valor da senha do usuário
     public function getDessenha()
     {
         return $this->dessenha;
     }
 
+    //Recupera o valor da data de cadastro do usuário
     public function getDtcadastro()
     {
         return $this->dtcadastro;
     }
 
+    //Carrega o usuario pelo ID
     public function loadById(int $idusuario)
     {
         $sql = new SQL('sqlsrv');
@@ -65,6 +77,7 @@ class Usuario
         }
     }
 
+    //Realiza um busca pelo login passado
     public static function search($login)
     {
 
@@ -73,7 +86,7 @@ class Usuario
         return $sql->select("SELECT * FROM tb_users WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(':SEARCH' => "%" . $login . "%"));
     }
 
-
+    //Verifica se o usuário existe para realizar o login
     public function login($login, $password)
     {
 
@@ -88,7 +101,7 @@ class Usuario
         }
     }
 
-
+    //Recupera um lista de usuários
     public static function getList()
     {
 
@@ -97,6 +110,7 @@ class Usuario
         return $sql->select("SELECT * FROM tb_users ORDER BY deslogin");
     }
 
+    //Atualiza o valor dos atriubutos do objeto
     public function setData($data)
     {
 
@@ -106,6 +120,7 @@ class Usuario
         $this->setDtcadastro(new DateTime($data['dtcadastro']));
     }
 
+    //insere um novo usuáio no banco de dados
     public function insert()
     {
         $sql = new SQL('mysql');
@@ -122,6 +137,7 @@ class Usuario
         }
     }
 
+    //Deleta um usuário do banco de dados
     public function delete(){
 
         $sql = new SQL();
@@ -132,6 +148,7 @@ class Usuario
 
     }
 
+    //Limpa os valores dos objetos do banco de dados
     public function clearObject(){
 
         $this->setDeslogin('');
@@ -141,6 +158,7 @@ class Usuario
 
     }
 
+    //Atualiza os valores do usuário selecionado
     public function update($login, $password, $id){
 
         $this->setDeslogin($login);
@@ -151,6 +169,7 @@ class Usuario
         $sql->querys("UPDATE tb_users SET deslogin = '$login', dessenha = '$password' WHERE idusuario = $id");
     }
 
+    //Retorna o objeto em string
     public function __toString()
     {
         if ($this->getDtcadastro() !== null) {

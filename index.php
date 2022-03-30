@@ -46,12 +46,12 @@
 
     //Deleta um usuario
 
-    $user = new Usuario();
+    // $user = new Usuario();
 
-    $user->loadById(3);
+    // $user->loadById(3);
 
-    $user->delete();
+    // $user->delete();
 
-    echo $user;
+    // echo $user;
 
 ?>
