@@ -5,7 +5,7 @@
         private $conn;
 
         public function __construct(){
-            $this->conn = new PDO("mysql:host=localhost; dbname=db_php7", "root", "");
+            $this->conn = new PDO("sqlsrv:Database=db_php7; server=PRY-N-I10055\SQLEXPRESS", "sa", "M@teus2432");
         }
 
         private function setParams($statment, $parameters = array()){
